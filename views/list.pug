@@ -4,4 +4,8 @@ html(lang="en")
     title POC for Email Proxy via SES - List
   body
     h1 List of Verified Accounts (Email and Domain)
-    p= values
+    ul
+      each val in values
+        li= val
+      else
+        li No verified accounts.
