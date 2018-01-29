@@ -1,16 +1,19 @@
 // Require objects.
-var express = require('express');
-var app     = express();
-var aws     = require('aws-sdk');
+const express = require('express');
+const app     = express();
+const aws     = require('aws-sdk');
 
 // Edit this with YOUR email address.
-var email   = "narrator@alittlefiction.xyz";
+let email   = "narrator@alittlefiction.xyz";
     
 // Load your AWS credentials and try to instantiate the object.
 aws.config.loadFromPath(__dirname + '/config.json');
 
 // Instantiate SES.
-var ses = new aws.SES();
+const ses = new aws.SES();
+
+app.set('view engine', 'pug');
+app.use(bodyParser.json({type: 'application/json'}));
 
 // Verify email addresses.
 // This only send the verify email with link. It will not automagically auth an email.
