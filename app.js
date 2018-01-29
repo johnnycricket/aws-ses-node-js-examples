@@ -84,13 +84,13 @@ app.post('/api/send', (req, res) => {
         };
         let ses_mail = `From: ${emails.from}
         To: ${emails.email}
-        Subject: SES POC TEST
+        Subject: simple email proof of concept
         MIME-VERSION: 1.0
         Content-Type: text/html; charset=us-ascii
 
         This is the body of the email which I am sending.`;
         const params = {
-            RawMessage: { Data: new Buffer(ses_mail) },
+            RawMessage: { Data: ses_mail },
             Destinations: [ emails.email ]
         }
         ses.sendRawEmail(params, (err, data) => {
