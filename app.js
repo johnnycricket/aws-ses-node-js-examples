@@ -26,20 +26,20 @@ app.get('/', (req, res) => {
 
 // Verify email addresses.
 // This only send the verify email with link. It will not automagically auth an email.
-app.get('/api/verify', function (req, res) {
-    var params = {
-        EmailAddress: email
-    };
+// app.get('/api/verify', function (req, res) {
+//     var params = {
+//         EmailAddress: email
+//     };
     
-    ses.verifyEmailAddress(params, function(err, data) {
-        if(err) {
-            res.send(err);
-        } 
-        else {
-            res.send(data);
-        } 
-    });
-});
+//     ses.verifyEmailAddress(params, function(err, data) {
+//         if(err) {
+//             res.send(err);
+//         } 
+//         else {
+//             res.send(data);
+//         } 
+//     });
+// });
 
 // Listing the verified email addresses.
 app.get('/list', function (req, res) {
@@ -51,22 +51,6 @@ app.get('/list', function (req, res) {
             const values = data.Identities;
             //res.send(data);
             res.render('list', { values: values });
-        } 
-    });
-});
-
-// Deleting verified email addresses.
-app.get('/api/delete', function (req, res) {
-    var params = {
-        EmailAddress: email
-    };
-
-    ses.deleteIdentity(params, function(err, data) {
-        if(err) {
-            res.send(err);
-        } 
-        else {
-            res.send(data);
         } 
     });
 });
@@ -99,40 +83,13 @@ app.post('/api/send', (req, res) => {
                 console.log(ses_mail);
                 res.redirect(`/notsent?err=${err}`);
             } else {
+                console.log(data);
                 res.redirect(`/sent?data=${data}`);
             }
         });
     } else {
         res.redirect('/notsent?err=NoData');
     }
-    // var ses_mail = "From: 'AWS Tutorial Series' <" + email + ">\n";
-    // ses_mail = ses_mail + "To: " + email + "\n";
-    // ses_mail = ses_mail + "Subject: AWS SES Attachment Example\n";
-    // ses_mail = ses_mail + "MIME-Version: 1.0\n";
-    // ses_mail = ses_mail + "Content-Type: multipart/mixed; boundary=\"NextPart\"\n\n";
-    // ses_mail = ses_mail + "--NextPart\n";
-    // ses_mail = ses_mail + "Content-Type: text/html; charset=us-ascii\n\n";
-    // ses_mail = ses_mail + "This is the bodybo of the email.\n\n";
-    // ses_mail = ses_mail + "--NextPart\n";
-    // ses_mail = ses_mail + "Content-Type: text/plain;\n";
-    // ses_mail = ses_mail + "Content-Disposition: attachment; filename=\"attachment.txt\"\n\n";
-    // ses_mail = ses_mail + "AWS Tutorial Series - Really cool file attachment!" + "\n\n";
-    // ses_mail = ses_mail + "--NextPart--";
-    
-    // var params = {
-    //     RawMessage: { Data: new Buffer(ses_mail) },
-    //     Destinations: [ email ],
-    //     Source: "'AWS Tutorial Series' <" + email + ">'"
-    // };
-    
-    // ses.sendRawEmail(params, function(err, data) {
-    //     if(err) {
-    //         res.send(err);
-    //     } 
-    //     else {
-    //         res.send(data);
-    //     }           
-    // });
 });
 
 app.get('/sent', (req, res) => {
