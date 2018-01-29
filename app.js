@@ -15,6 +15,10 @@ const ses = new aws.SES();
 app.set('view engine', 'pug');
 app.use(bodyParser.json({type: 'application/json'}));
 
+app.get('/', (req, res) => {
+    app.render('index');
+});
+
 // Verify email addresses.
 // This only send the verify email with link. It will not automagically auth an email.
 app.get('/verify', function (req, res) {
