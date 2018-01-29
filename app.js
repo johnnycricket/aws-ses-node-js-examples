@@ -96,6 +96,7 @@ app.post('/api/send', (req, res) => {
         ses.sendRawEmail(params, (err, data) => {
             if(err) {
                 //add query params about why...
+                console.log(ses_mail);
                 res.redirect(`/notsent?err=${err}`);
             } else {
                 res.redirect(`/sent?data=${data}`);
