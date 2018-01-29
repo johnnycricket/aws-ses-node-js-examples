@@ -76,12 +76,33 @@ app.get('/send', (req, res) => {
 })
 
 // Sending RAW email including an attachment.
-app.post('/api/send', (req, res) => {
+app.post('/api/send', (req, res) => {    
     if(req.body) {
-        console.log(req.body);
-        res.redirect('/sent')
+        const emails = {
+            email: req.body.email,
+            from: 'noreply@alittlefiction.xyz'
+        };
+        let ses_mail = `From: ${emails.from}
+        To: ${emails.email}
+        Subject: SES POC TEST
+        MIME-VERSION: 1.0
+        Content-Type: text/html; charset=us-ascii
+
+        This is the body of the email which I am sending.`;
+        const params = {
+            RawMessage: { Data: new Buffer(ses_mail) },
+            Destinations: [ email ]
+        }
+        ses.sendRawEmail(params, (err, data) => {
+            if(err) {
+                //add query params about why...
+                res.redirect(`/notsent?err=${err}`);
+            } else {
+                res.redirect(`/sent?data=${data}`);
+            }
+        });
     } else {
-        res.redirect('/notsent')
+        res.redirect('/notsent?err=NoData');
     }
     // var ses_mail = "From: 'AWS Tutorial Series' <" + email + ">\n";
     // ses_mail = ses_mail + "To: " + email + "\n";
