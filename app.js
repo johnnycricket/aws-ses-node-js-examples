@@ -79,9 +79,9 @@ app.get('/send', (req, res) => {
 app.post('/api/send', (req, res) => {
     if(req.body) {
         console.log(req.body);
-        res.render('sent', {message: 'sent'})
+        res.redirect('/sent')
     } else {
-        res.render('sent', {message: 'not sent'})
+        res.redirect('/notsent')
     }
     // var ses_mail = "From: 'AWS Tutorial Series' <" + email + ">\n";
     // ses_mail = ses_mail + "To: " + email + "\n";
@@ -112,6 +112,13 @@ app.post('/api/send', (req, res) => {
     //     }           
     // });
 });
+
+app.get('/sent', (req, res) => {
+    res.render('sent', {message: 'sent'});
+})
+app.get('/notsent', (req, res) => {
+    res.render('sent', {message: 'not sent'});
+})
 
 // Start server.
 var server = app.listen(80, '172.31.88.74', function () {
