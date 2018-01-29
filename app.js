@@ -49,7 +49,7 @@ app.get('/list', function (req, res) {
         else {
             const values = data.Identities;
             //res.send(data);
-            res.render('list', values);
+            res.render('list', { values: values });
         } 
     });
 });
