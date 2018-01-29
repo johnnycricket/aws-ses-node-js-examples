@@ -82,11 +82,11 @@ app.post('/api/send', (req, res) => {
             email: req.body.email,
             from: 'noreply@alittlefiction.xyz'
         };
-        let ses_mail = `From: ${emails.from}
+        let ses_mail = `From: ${emails.from};
         To: ${emails.email}
         Subject: simple email proof of concept
         MIME-VERSION: 1.0
-        Content-Type: text/html; charset=us-ascii
+        Content-Type: text/plain; charset=us-ascii
 
         This is the body of the email which I am sending.`;
         const params = {
