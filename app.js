@@ -17,6 +17,7 @@ aws.config.loadFromPath(__dirname + '/config.json');
 const ses = new aws.SES();
 
 app.set('view engine', 'pug');
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({type: 'application/json'}));
 
 app.get('/', (req, res) => {
