@@ -20,7 +20,7 @@ app.set('view engine', 'pug');
 app.use(bodyParser.json({type: 'application/json'}));
 
 app.get('/', (req, res) => {
-    app.render('index');
+    res.render('index');
 });
 
 // Verify email addresses.
@@ -47,7 +47,8 @@ app.get('/list', function (req, res) {
             res.send(err);
         } 
         else {
-            res.send(data);
+            const values = data.ResponseMetaData.Identities;
+            res.render('list', values);
         } 
     });
 });
