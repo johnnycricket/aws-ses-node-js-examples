@@ -47,7 +47,7 @@ app.get('/delete', function (req, res) {
         EmailAddress: email
     };
 
-    ses.deleteVerifiedEmailAddress(params, function(err, data) {
+    ses.deleteIdentity(params, function(err, data) {
         if(err) {
             res.send(err);
         } 
