@@ -13,6 +13,7 @@ aws.config.loadFromPath(__dirname + '/config.json');
 var ses = new aws.SES();
 
 // Verify email addresses.
+// This only send the verify email with link. It will not automagically auth an email.
 app.get('/verify', function (req, res) {
     var params = {
         EmailAddress: email
@@ -30,7 +31,7 @@ app.get('/verify', function (req, res) {
 
 // Listing the verified email addresses.
 app.get('/list', function (req, res) {
-    ses.listVerifiedEmailAddresses(function(err, data) {
+    ses.listIdentities(function(err, data) {
         if(err) {
             res.send(err);
         } 
@@ -39,6 +40,10 @@ app.get('/list', function (req, res) {
         } 
     });
 });
+
+app.get('/listdomains', (req, res) => {
+    ses.
+})
 
 // Deleting verified email addresses.
 app.get('/delete', function (req, res) {
