@@ -1,3 +1,5 @@
+'use strict';
+
 // Require objects.
 const express = require('express');
 const app     = express();
