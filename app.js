@@ -41,10 +41,6 @@ app.get('/list', function (req, res) {
     });
 });
 
-app.get('/listdomains', (req, res) => {
-    ses.
-})
-
 // Deleting verified email addresses.
 app.get('/delete', function (req, res) {
     var params = {
