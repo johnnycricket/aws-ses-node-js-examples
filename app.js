@@ -91,7 +91,7 @@ app.post('/api/send', (req, res) => {
         This is the body of the email which I am sending.`;
         const params = {
             RawMessage: { Data: new Buffer(ses_mail) },
-            Destinations: [ email ]
+            Destinations: [ emails.email ]
         }
         ses.sendRawEmail(params, (err, data) => {
             if(err) {
