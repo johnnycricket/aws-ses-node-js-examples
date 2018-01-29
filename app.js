@@ -75,8 +75,12 @@ app.get('/send', (req, res) => {
 })
 
 // Sending RAW email including an attachment.
-app.get('/api/send', (req, res) => {
-    console.log(req.body);
+app.post('/api/send', (req, res) => {
+    if(req.body) {
+        console.log(req.body);
+    } else {
+        console.log('nope');
+    }
     // var ses_mail = "From: 'AWS Tutorial Series' <" + email + ">\n";
     // ses_mail = ses_mail + "To: " + email + "\n";
     // ses_mail = ses_mail + "Subject: AWS SES Attachment Example\n";
