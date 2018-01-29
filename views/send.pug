@@ -3,6 +3,6 @@ html(type="en")
   title POC
 body
   h1 Send An Email
-  form(action="/api/send")
-    input(type="email" required)
+  form(action="/api/send" method="POST" id="addyform")
+    input(type="email" name="email" required)
     button(type="submit") Send
