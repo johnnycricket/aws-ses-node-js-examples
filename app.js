@@ -2,7 +2,6 @@
 
 // Require objects.
 const express = require('express');
-const bodyParser = require('body-parser');
 const app     = express();
 const aws     = require('aws-sdk');
 
