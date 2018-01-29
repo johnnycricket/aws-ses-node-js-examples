@@ -4,7 +4,7 @@ var app     = express();
 var aws     = require('aws-sdk');
 
 // Edit this with YOUR email address.
-var email   = "hello@example.com";
+var email   = "narrator@alittlefiction.xyz";
     
 // Load your AWS credentials and try to instantiate the object.
 aws.config.loadFromPath(__dirname + '/config.json');
@@ -89,7 +89,7 @@ app.get('/send', function (req, res) {
 });
 
 // Start server.
-var server = app.listen(80, function () {
+var server = app.listen(80, '172.31.88.74', function () {
     var host = server.address().address;
     var port = server.address().port;
 
