@@ -47,10 +47,9 @@ app.get('/list', function (req, res) {
             res.send(err);
         } 
         else {
-            const values = data;
-            console.log(values);
-            res.send(data);
-            //res.render('list', values);
+            const values = data.Identities;
+            //res.send(data);
+            res.render('list', values);
         } 
     });
 });
