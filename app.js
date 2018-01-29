@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 // Verify email addresses.
 // This only send the verify email with link. It will not automagically auth an email.
-app.get('/verify', function (req, res) {
+app.get('/api/verify', function (req, res) {
     var params = {
         EmailAddress: email
     };
@@ -55,7 +55,7 @@ app.get('/list', function (req, res) {
 });
 
 // Deleting verified email addresses.
-app.get('/delete', function (req, res) {
+app.get('/api/delete', function (req, res) {
     var params = {
         EmailAddress: email
     };
@@ -70,8 +70,12 @@ app.get('/delete', function (req, res) {
     });
 });
 
+app.get('/send', (req, res) => {
+    res.render('tosend');
+})
+
 // Sending RAW email including an attachment.
-app.get('/send', function (req, res) {
+app.get('/api/send', function (req, res) {
     var ses_mail = "From: 'AWS Tutorial Series' <" + email + ">\n";
     ses_mail = ses_mail + "To: " + email + "\n";
     ses_mail = ses_mail + "Subject: AWS SES Attachment Example\n";
