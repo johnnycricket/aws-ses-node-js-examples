@@ -75,8 +75,9 @@ app.get('/send', (req, res) => {
 })
 
 // Sending RAW email including an attachment.
-app.get('/api/send', (req, res) => {
+app.POST('/api/send', (req, res) => {
     if(req.body) {
+        console.log(req.body);
         res.render('sent', {message: 'sent'})
     } else {
         res.render('sent', {message: 'not sent'})
