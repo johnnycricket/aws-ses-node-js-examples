@@ -8,7 +8,7 @@ const app     = express();
 const aws     = require('aws-sdk');
 
 // Edit this with YOUR email address.
-let email   = "narrator@alittlefiction.xyz";
+//let email   = "narrator@alittlefiction.xyz";
     
 // Load your AWS credentials and try to instantiate the object.
 aws.config.loadFromPath(__dirname + '/config.json');
@@ -71,39 +71,40 @@ app.get('/api/delete', function (req, res) {
 });
 
 app.get('/send', (req, res) => {
-    res.render('tosend');
+    res.render('send');
 })
 
 // Sending RAW email including an attachment.
 app.get('/api/send', function (req, res) {
-    var ses_mail = "From: 'AWS Tutorial Series' <" + email + ">\n";
-    ses_mail = ses_mail + "To: " + email + "\n";
-    ses_mail = ses_mail + "Subject: AWS SES Attachment Example\n";
-    ses_mail = ses_mail + "MIME-Version: 1.0\n";
-    ses_mail = ses_mail + "Content-Type: multipart/mixed; boundary=\"NextPart\"\n\n";
-    ses_mail = ses_mail + "--NextPart\n";
-    ses_mail = ses_mail + "Content-Type: text/html; charset=us-ascii\n\n";
-    ses_mail = ses_mail + "This is the body of the email.\n\n";
-    ses_mail = ses_mail + "--NextPart\n";
-    ses_mail = ses_mail + "Content-Type: text/plain;\n";
-    ses_mail = ses_mail + "Content-Disposition: attachment; filename=\"attachment.txt\"\n\n";
-    ses_mail = ses_mail + "AWS Tutorial Series - Really cool file attachment!" + "\n\n";
-    ses_mail = ses_mail + "--NextPart--";
+    console.log(req);
+    // var ses_mail = "From: 'AWS Tutorial Series' <" + email + ">\n";
+    // ses_mail = ses_mail + "To: " + email + "\n";
+    // ses_mail = ses_mail + "Subject: AWS SES Attachment Example\n";
+    // ses_mail = ses_mail + "MIME-Version: 1.0\n";
+    // ses_mail = ses_mail + "Content-Type: multipart/mixed; boundary=\"NextPart\"\n\n";
+    // ses_mail = ses_mail + "--NextPart\n";
+    // ses_mail = ses_mail + "Content-Type: text/html; charset=us-ascii\n\n";
+    // ses_mail = ses_mail + "This is the body of the email.\n\n";
+    // ses_mail = ses_mail + "--NextPart\n";
+    // ses_mail = ses_mail + "Content-Type: text/plain;\n";
+    // ses_mail = ses_mail + "Content-Disposition: attachment; filename=\"attachment.txt\"\n\n";
+    // ses_mail = ses_mail + "AWS Tutorial Series - Really cool file attachment!" + "\n\n";
+    // ses_mail = ses_mail + "--NextPart--";
     
-    var params = {
-        RawMessage: { Data: new Buffer(ses_mail) },
-        Destinations: [ email ],
-        Source: "'AWS Tutorial Series' <" + email + ">'"
-    };
+    // var params = {
+    //     RawMessage: { Data: new Buffer(ses_mail) },
+    //     Destinations: [ email ],
+    //     Source: "'AWS Tutorial Series' <" + email + ">'"
+    // };
     
-    ses.sendRawEmail(params, function(err, data) {
-        if(err) {
-            res.send(err);
-        } 
-        else {
-            res.send(data);
-        }           
-    });
+    // ses.sendRawEmail(params, function(err, data) {
+    //     if(err) {
+    //         res.send(err);
+    //     } 
+    //     else {
+    //         res.send(data);
+    //     }           
+    // });
 });
 
 // Start server.
