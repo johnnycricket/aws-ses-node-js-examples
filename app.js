@@ -82,16 +82,16 @@ app.post('/api/send', (req, res) => {
             email: req.body.email,
             from: 'noreply@alittlefiction.xyz'
         };
-        let ses_mail = `From: ${emails.from};
-        To: ${emails.email}
-        Subject: simple email proof of concept
-        MIME-VERSION: 1.0
-        Content-Type: text/plain; charset=us-ascii
-
+        let ses_mail = `From: ${emails.from}\n
+        To: ${emails.email}\n
+        Subject: simple email proof of concept\n
+        MIME-VERSION: 1.0\n
+        Content-Type: text/plain; charset=us-ascii\n\n
         This is the body of the email which I am sending.`;
         const params = {
             RawMessage: { Data: ses_mail },
-            Destinations: [ emails.email ]
+            Destinations: [ emails.email ],
+            Source: emails.from
         }
         ses.sendRawEmail(params, (err, data) => {
             if(err) {
