@@ -76,7 +76,7 @@ app.get('/send', (req, res) => {
 
 // Sending RAW email including an attachment.
 app.get('/api/send', (req, res) => {
-    console.log(req);
+    console.log(req.body);
     // var ses_mail = "From: 'AWS Tutorial Series' <" + email + ">\n";
     // ses_mail = ses_mail + "To: " + email + "\n";
     // ses_mail = ses_mail + "Subject: AWS SES Attachment Example\n";
@@ -84,7 +84,7 @@ app.get('/api/send', (req, res) => {
     // ses_mail = ses_mail + "Content-Type: multipart/mixed; boundary=\"NextPart\"\n\n";
     // ses_mail = ses_mail + "--NextPart\n";
     // ses_mail = ses_mail + "Content-Type: text/html; charset=us-ascii\n\n";
-    // ses_mail = ses_mail + "This is the body of the email.\n\n";
+    // ses_mail = ses_mail + "This is the bodybo of the email.\n\n";
     // ses_mail = ses_mail + "--NextPart\n";
     // ses_mail = ses_mail + "Content-Type: text/plain;\n";
     // ses_mail = ses_mail + "Content-Disposition: attachment; filename=\"attachment.txt\"\n\n";
