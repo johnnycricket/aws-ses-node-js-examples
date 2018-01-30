@@ -41,10 +41,8 @@ app.get('/list', function (req, res) {
 app.get('/proxylist', function (req, res) {
     const params = {
         TableName: 'pocEmailProxy',
-        KeyConditionExpression: 'Proxy',
-        Select: 'ALL_ATTRIBUTES'
     }
-    proxydb.query(params, (err, data) => {
+    proxydb.scan(params, (err, data) => {
         if (err) {
             res.send(err);
         } else {
