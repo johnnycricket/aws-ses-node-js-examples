@@ -41,13 +41,15 @@ app.get('/list', function (req, res) {
 app.get('/proxylist', function (req, res) {
     const params = {
         TableName: 'pocEmailProxy',
-        KeyConditionExpression: '#proxy = :proxy'
+        Key: {
+            "KEY_NAME": {S: 'proxy'}
+        }
     }
-    proxydb.query(params, (err, data) => {
+    proxydb.getItem(params, (err, data) => {
         if (err) {
             res.send(err);
         } else {
-            res.render('db', { values: data});
+            res.render('db', { values: data });
         }
     })
 })
