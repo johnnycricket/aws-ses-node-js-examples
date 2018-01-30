@@ -15,7 +15,7 @@ aws.config.loadFromPath(__dirname + '/config.json');
 
 // Instantiate SES.
 const ses = new aws.SES();
-
+const proxydb = new aws.DynamoDB();
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({type: 'application/json'}));
@@ -23,23 +23,6 @@ app.use(bodyParser.json({type: 'application/json'}));
 app.get('/', (req, res) => {
     res.render('index');
 });
-
-// Verify email addresses.
-// This only send the verify email with link. It will not automagically auth an email.
-// app.get('/api/verify', function (req, res) {
-//     var params = {
-//         EmailAddress: email
-//     };
-    
-//     ses.verifyEmailAddress(params, function(err, data) {
-//         if(err) {
-//             res.send(err);
-//         } 
-//         else {
-//             res.send(data);
-//         } 
-//     });
-// });
 
 // Listing the verified email addresses.
 app.get('/list', function (req, res) {
@@ -54,6 +37,20 @@ app.get('/list', function (req, res) {
         } 
     });
 });
+
+app.get('/proxylist', function (req, res) {
+    const params = {
+        TableName: 'pocEmailProxy',
+        KeyConditionExpress: 'proxy'
+    }
+    proxydb.query(params, (err, data) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.render('db', { values: data});
+        }
+    })
+})
 
 app.get('/send', (req, res) => {
     res.render('send');
