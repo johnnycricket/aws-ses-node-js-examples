@@ -3,4 +3,8 @@ html(type="en")
   title POC for db
 body
   h1 What's in pocEmailProxy Table?
-  p= values
+  ul
+    for val in values
+      li= val.proxy
+    else
+      li Zilch
