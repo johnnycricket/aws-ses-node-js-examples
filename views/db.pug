@@ -4,4 +4,7 @@ html(type="en")
 body
   h1 What's in pocEmailProxy Table?
   ul
-    li= values
+    for val in values
+      li= val.N
+    else
+      li nothing here.

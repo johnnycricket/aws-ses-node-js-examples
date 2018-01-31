@@ -40,15 +40,14 @@ app.get('/list', function (req, res) {
 
 app.get('/proxylist', function (req, res) {
     const params = {
-        TableName: 'pocEmailProxy',
+        TableName: 'emailproxypoc',
     }
     proxydb.scan(params, (err, data) => {
         if (err) {
             res.send(err);
         } else {
-            let values = JSON.parse(data);
-            console.log(values.items);
-            res.render('db', { values: values.items });
+            console.log(data.Items);
+            res.render('db', { values: values.Items });
         }
     })
 })
