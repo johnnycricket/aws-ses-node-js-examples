@@ -4,5 +4,7 @@ html(type="en")
 body
   h1 Send An Email
   form(action="/api/send" method="POST" id="addyform")
-    input(type="email" name="email" required)
+    select(name='email')
+      for prox in proxies
+        option(value=prox.proxy.S)= prox.proxy.S
     button Send

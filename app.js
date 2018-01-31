@@ -7,9 +7,6 @@ const bodyParser = require('body-parser');
 const app     = express();
 const aws     = require('aws-sdk');
 
-// Edit this with YOUR email address.
-//let email   = "narrator@alittlefiction.xyz";
-    
 // Load your AWS credentials and try to instantiate the object.
 aws.config.loadFromPath(__dirname + '/config.json');
 
@@ -46,14 +43,23 @@ app.get('/proxylist', function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            console.log(data.Items);
             res.render('db', { values: data.Items });
         }
     })
 })
 
 app.get('/send', (req, res) => {
-    res.render('send');
+    const params = {
+        TableName: 'emailproxypoc',
+    }
+    proxydb.scan( (err, data) => {
+        if(err) {
+            res.send(err);
+        } else {
+            res.render('send', {proxies: data.Items});
+        }
+    })
+    
 })
 
 // Sending RAW email including an attachment.
