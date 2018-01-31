@@ -46,8 +46,9 @@ app.get('/proxylist', function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            console.log(data);
-            res.render('db', { values: data.items });
+            let values = JSON.parse(data);
+            console.log(values.items);
+            res.render('db', { values: values.items });
         }
     })
 })
