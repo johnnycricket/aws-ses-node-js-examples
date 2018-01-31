@@ -3,8 +3,15 @@ html(type="en")
   title POC for db
 body
   h1 What's in pocEmailProxy Table?
-  ul
+  table
+    tr
+      td real email
+      td proxy email
     for val in values
-      li= val.N
+      tr 
+        td= val.real.S
+        td= val.proxy.S
     else
-      li nothing here.
+      tr
+        td --
+        td --
