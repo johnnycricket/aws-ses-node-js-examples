@@ -52,7 +52,7 @@ app.get('/send', (req, res) => {
     const params = {
         TableName: 'emailproxypoc',
     }
-    proxydb.scan( (err, data) => {
+    proxydb.scan(params, (err, data) => {
         if(err) {
             res.send(err);
         } else {
@@ -62,7 +62,6 @@ app.get('/send', (req, res) => {
     
 })
 
-// Sending RAW email including an attachment.
 app.post('/api/send', (req, res) => {    
     if(req.body) {
         const emails = {
