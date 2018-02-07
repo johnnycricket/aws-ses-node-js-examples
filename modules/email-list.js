@@ -4,7 +4,7 @@ module.exports = {
   listFromS3: () => {
     let stuff = {}
     return new Promise((resolve, reject) => {
-      aws.s3.listObjectsV2({
+      s3.listObjectsV2({
         Bucket: 'alittlefiction.ses',
         Delimiter: '/',
         Prefix: 'email/'
@@ -18,7 +18,7 @@ module.exports = {
     })
   },
   getFromS3: () => {
-    aws.s3.getObject({
+    s3.getObject({
       Bucket: '',
       Key: ''
     }, (err, result) => {
