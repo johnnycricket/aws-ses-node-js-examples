@@ -105,7 +105,7 @@ app.get('/notsent', (req, res) => {
 })
 
 app.get('/forwarded', (req, res) => {
-    let stuff = emailList.listFromS3();
+    let stuff = emailList.listFromS3(s3);
     console.log(util.inspect(stuff, {depth:null}));
     res.render('emails', {values: stuff})
 })
