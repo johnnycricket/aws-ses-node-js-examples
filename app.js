@@ -4,8 +4,9 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const app     = express();
-const aws     = require('aws-sdk');
+const app = express();
+const aws = require('aws-sdk');
+const emailList = require('email-list');
 
 // Load your AWS credentials and try to instantiate the object.
 aws.config.loadFromPath(__dirname + '/config.json');
@@ -13,6 +14,7 @@ aws.config.loadFromPath(__dirname + '/config.json');
 // Instantiate SES.
 const ses = new aws.SES();
 const proxydb = new aws.DynamoDB();
+const s3 = new aws.s3();
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({type: 'application/json'}));
@@ -99,6 +101,11 @@ app.get('/sent', (req, res) => {
 })
 app.get('/notsent', (req, res) => {
     res.render('sent', {message: 'not sent'});
+})
+
+app.get('/forwarded', (req, res) => {
+    let stuff = emailList.listFromS3();
+    res.render('emails', {values: stuff})
 })
 
 // Start server.
