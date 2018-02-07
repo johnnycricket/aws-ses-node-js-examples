@@ -12,7 +12,6 @@ module.exports = {
         if(err) {
           return reject(new Error('Error: listObjects failed...'))
         } else {
-          console.log(result);
           return resolve(result)
         }
       })

@@ -5,6 +5,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const util = require('util');
 const aws = require('aws-sdk');
 const emailList = require('./modules/email-list');
 
@@ -105,6 +106,7 @@ app.get('/notsent', (req, res) => {
 
 app.get('/forwarded', (req, res) => {
     let stuff = emailList.listFromS3();
+    console.log(util.inspect(stuff, {depth:null}));
     res.render('emails', {values: stuff})
 })
 
