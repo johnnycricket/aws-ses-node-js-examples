@@ -12,9 +12,10 @@ const emailList = require('./modules/email-list');
 // Load your AWS credentials and try to instantiate the object.
 aws.config.loadFromPath(__dirname + '/config.json');
 
-// Instantiate SES.
+// Instantiate SES, dynamo, and s3.
 const ses = new aws.SES();
 const proxydb = new aws.DynamoDB();
+const s3 = new aws.S3();
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({type: 'application/json'}));
@@ -104,7 +105,7 @@ app.get('/notsent', (req, res) => {
 })
 
 app.get('/forwarded', (req, res) => {
-    let stuff = emailList.listFromS3();
+    let stuff = emailList.listFromS3(s3);
     console.log(util.inspect(stuff, {depth:null}));
     res.render('emails', {values: stuff})
 })
