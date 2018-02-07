@@ -1,7 +1,10 @@
 'use strict';
 
+const aws = require('aws-sdk');
+const s3 = new aws.S3();
+
 module.exports = {
-  listFromS3: (s3) => {
+  listFromS3: () => {
     let stuff = {}
     return new Promise((resolve, reject) => {
       s3.listObjectsV2({
