@@ -15,7 +15,6 @@ aws.config.loadFromPath(__dirname + '/config.json');
 // Instantiate SES.
 const ses = new aws.SES();
 const proxydb = new aws.DynamoDB();
-const s3 = new aws.S3();
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({type: 'application/json'}));

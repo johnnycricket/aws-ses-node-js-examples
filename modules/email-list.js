@@ -1,10 +1,13 @@
 'use strict';
 
 const aws = require('aws-sdk');
+aws.config.loadFromPath(__dirname + '/config.json');
+
 const s3 = new aws.S3();
 
 module.exports = {
   listFromS3: () => {
+    console.log(s3);
     let stuff = {}
     return new Promise((resolve, reject) => {
       s3.listObjectsV2({
