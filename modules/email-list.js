@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  listFromS3: () => {
+  listFromS3: (s3) => {
     let stuff = {}
     return new Promise((resolve, reject) => {
       s3.listObjectsV2({
