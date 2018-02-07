@@ -6,7 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const aws = require('aws-sdk');
-const emailList = require('email-list');
+const emailList = require('modules/email-list');
 
 // Load your AWS credentials and try to instantiate the object.
 aws.config.loadFromPath(__dirname + '/config.json');
